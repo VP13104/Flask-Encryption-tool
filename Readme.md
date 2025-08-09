@@ -23,3 +23,38 @@ This tool allows you to encrypt and decrypt both text and files using the **AES-
 ---
 
 ## 📂 Project Structure
+│<br>
+├── app.py # Main Flask backend <br>
+├── encryption_crypto_utils.py # Encryption/Decryption logic<br>
+├── requirements.txt # Python dependencies<br>
+├── README.md # Project documentation<br>
+│<br>
+├── templates/ # HTML files<br>
+│ ├── main.html<br>
+│ ├── encrypt.html<br>
+│ ├── decrypt.html<br>
+│ ├── display_encrypt.html<br>
+│ ├── display_decrypt.html<br>
+│<br>
+├── static/ # Static assets<br>
+│ ├── style.css # Stylesheet<br>
+│ ├── hover.js # JS for hover effect<br>
+│ ├── script_encrypt.js # JS for encryption page<br>
+│ ├── script_decrypt.js # JS for decryption page<br>
+│ ├── file3.jpeg # Image used in UI<br>
+│<br>
+
+---
+
+
+## ⚙️ Installation & Usage
+
+### 1️⃣ Clone the Repository
+git clone https://github.com/VP13104/Flask-Encryption-tool.git
+cd Flask-Encryption-tool
+
+### 2️⃣ Install Dependencies
+pip install -r requirments.txt
+
+### 3️⃣ Run the Application
+python app.py
