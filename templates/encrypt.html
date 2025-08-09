@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encrypt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylee.css') }}">
+</head>
+<body>
+    <header>
+        <div class="left"> Encryptor / Decryptor </div>
+        <div class="right">by vineeth </div>
+    </header><br>
+    <div class="container">
+        <div class="box1">
+            <img src="{{ url_for('static', filename='file3.jpeg') }}" style="max-width: 80px; max-height: 80px;">
+            <div class="h1 white center-text">TEXT ENCRYPTER </div>
+            <p class="center-text custom-text red"> Free and Secure Text Encrypter.<br>
+                Private Encryption and Decryption in your Browser
+            </p>
+            <p class="custom-text white"> Text Encrypter allows to securely encrypt and decrypt any kind of text data for protected storage. It can be used for sensitive 
+                data encryption for example passwords or seeds. It uses secure AES CBC algorithm with 256 bits long key.
+            </p>
+            <h1 class="center-text h1 white">
+                How IT WORKS
+            </h1>
+            <p class="custom-text white">
+                1. Enter or upload the text you want to encrypt.<br>
+                2. Enter your encryption key (can be any length).<br>
+                3. Click Encrypt to generate the encrypted text.<br>
+                4. (Optional) Click Save to download the encrypted text as a .txt file.<br>
+            </p>
+            <div class="custom-text white"><br>
+                        Encryption algorithm setup <br>
+                        # Algorithm: AES (Advanced Encryption Standard)<br>
+                        # Mode: CBC (Cipher Block Chaining)<br>
+                        # Key Length: Variable input length (user-defined), internally hashed to 256-bit using SHA-256<br>
+                        # IV (Initialization Vector): 16 bytes, randomly generated during encryption<br>
+                        # Padding Scheme: PKCS#7<br>
+                        # Encoding: Base64 for ciphertext and IV for safe display and transfer<br>
+            </div>
+        </div>
+    
+        <div class="box2">
+            <header>
+            <div class="h1 center-text">
+                        ENCRYPTION PANEL<br>
+                    </div>
+            </header>
+            <div class="subbox">
+                <div class="subsec">
+                        <!-- Toggle Buttons -->
+                    <div class="input-switch ">
+                        <button class="type-button" id="btnText">Type Text</button>
+                        <button class="file-button" id="btnFile">Read a File</button>
+                    </div>
+
+                    <!-- Textarea Input Section -->
+                    <div id="text-input-section">
+                        <label class="custom-text black" for="plaintext">Enter Plaintext</label>
+                        <textarea id="plaintext" placeholder="Enter your text..."></textarea>
+                    </div>
+
+                    <!-- File Input Section -->
+                    <div id="file-input-section" style="display: none;">
+                        <label class="h3 white" for="fileInput">Upload a Text File</label>
+                        <input type="file" id="fileInput" accept=".txt">
+                    </div>
+
+                    
+
+                    <!-- Encryption Key -->
+                    <label class="custom-text black" for="key">Encryption key</label>
+                    <textarea id="key" placeholder="provide encryption key"></textarea>
+
+                    <!-- Buttons -->
+                    <div class="button-section"><br>
+                        <button class="en-button" onclick="encrypt()">Encrypt</button>
+                    </div>
+                </div>
+                <div class="subsec">
+                    <label class="custom-text black" for="resultText"> Output Generated </label>
+                    <textarea id="resultText" readonly></textarea> <br>
+                    <button class="en-button" id="save-btn">Save File</button>
+                        
+                </div>
+            </div>
+        </div>
+      <script>
+        // Toggle between text input and file upload
+        document.getElementById('btnText').addEventListener('click', () => {
+            document.getElementById('text-input-section').style.display = 'block';
+            document.getElementById('file-input-section').style.display = 'none';
+        });
+
+        document.getElementById('btnFile').addEventListener('click', () => {
+            document.getElementById('text-input-section').style.display = 'none';
+            document.getElementById('file-input-section').style.display = 'block';
+        });
+
+        // Read file content and fill in textarea
+        document.getElementById('fileInput').addEventListener('change', function () {
+            const file = this.files[0];
+            if (file && file.type === "text/plain") {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('plaintext').value = e.target.result;
+                };
+                reader.readAsText(file);
+            } else {
+                alert("Please upload a valid .txt file.");
+            }
+        });
+
+        async function encrypt() {
+            // Encryption logic (to be implemented)
+            let input = document.getElementById('plaintext').value;
+            let key = document.getElementById('key').value;
+            let res = await fetch("/encrypt",{
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({input: input, key: key})
+            });
+            let data = await res.json();
+            console.log("ENcrypted messaage ", data);
+
+            if (data.ciphertext && data.iv) {
+                const resultText = `Encrypted Text:\n${data.ciphertext}\n\nIV:\n${data.iv}`;
+                document.getElementById('resultText').value = resultText;
+            } else {
+                document.getElementById('resultText').value = "Error: " + JSON.stringify(data);
+            }
+        }
+
+// Save result to file
+document.getElementById("save-btn").addEventListener("click", function () {
+    const text = document.getElementById("resultText").value;
+    const blob = new Blob([text], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "encrypted_output.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+        
+</script>
+</body>
+</html>
