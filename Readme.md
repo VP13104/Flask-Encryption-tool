@@ -24,20 +24,20 @@ This tool allows you to encrypt and decrypt both text and files using the **AES-
 
 ## 📂 Project Structure
 │<br>
-├── app.py # Main Flask backend <br>
+├── app.py # Main Flask backend<br>
 ├── encryption_crypto_utils.py # Encryption/Decryption logic<br>
 ├── requirements.txt # Python dependencies<br>
 ├── README.md # Project documentation<br>
 │<br>
 ├── templates/ # HTML files<br>
-│ ├── main.html<br>
-│ ├── encrypt.html<br>
-│ ├── decrypt.html<br>
+| ├── main.html<br>
+| ├── encrypt.html<br>
+| ├── decrypt.html<br>
 │<br>
 ├── static/ # Static assets<br>
-│ ├── decrypt.jpg<br>
+| ├── decrypt.jpg<br>
 | ├── encrypt.jpg<br>
-│ ├── file3.jpeg # Image used in UI<br>
+| ├── file3.jpeg # Image used in UI<br>
 | ├── hover.js # JS for hover effect<br>
 | ├── style.css #stylesheet <br>
 | ├── stylee.css #stylesheet <br>
