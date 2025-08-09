@@ -33,15 +33,14 @@ This tool allows you to encrypt and decrypt both text and files using the **AES-
 │ ├── main.html<br>
 │ ├── encrypt.html<br>
 │ ├── decrypt.html<br>
-│ ├── display_encrypt.html<br>
-│ ├── display_decrypt.html<br>
 │<br>
 ├── static/ # Static assets<br>
-│ ├── style.css # Stylesheet<br>
-│ ├── hover.js # JS for hover effect<br>
-│ ├── script_encrypt.js # JS for encryption page<br>
-│ ├── script_decrypt.js # JS for decryption page<br>
+│ ├── decrypt.jpg<br>
+| ├── encrypt.jpg<br>
 │ ├── file3.jpeg # Image used in UI<br>
+| ├── hover.js # JS for hover effect<br>
+| ├── style.css #stylesheet <br>
+| ├── stylee.css #stylesheet <br>
 │<br>
 
 ---
@@ -50,7 +49,7 @@ This tool allows you to encrypt and decrypt both text and files using the **AES-
 ## ⚙️ Installation & Usage
 
 ### 1️⃣ Clone the Repository
-git clone https://github.com/VP13104/Flask-Encryption-tool.git
+git clone https://github.com/VP13104/Flask-Encryption-tool.git <br>
 cd Flask-Encryption-tool
 
 ### 2️⃣ Install Dependencies
